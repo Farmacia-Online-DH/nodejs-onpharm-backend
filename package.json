@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-onpharm-backend",
+  "version": "1.0.0",
+  "description": "Criação do Back-end/API do Projeto Integrador.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Farmacia-Online-DH/nodejs-onpharm-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Farmacia-Online-DH/nodejs-onpharm-backend/issues"
+  },
+  "homepage": "https://github.com/Farmacia-Online-DH/nodejs-onpharm-backend#readme",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
+  }
+}
