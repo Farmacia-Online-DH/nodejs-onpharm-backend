@@ -1,26 +1,24 @@
 const sequelize = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataType) => {
     const Produto = sequelize.define('Produto', {
         produto_id: {
-            type: DataTypes.INTEGER,
+            type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nome_produto: DataTypes.STRING(60),
-        preco: DataTypes.INTEGER(7, 2),
-        /** o diagrama estava com o valor decimal, mas tive duvida e nao achei e coloquei desta forma */
-        descricao: DataTypes.STRING(100),
-        categoria: DataTypes.STRING(20),
-        quantidade: DataTypes.INTEGER(100),
-        /** coloquei integer aqui tambem */
-        fabricante: DataTypes.STRING(60)
+        nome_produto: DataType.STRING(20),
+        preco: DataType.DOUBLE(7, 2),
+        descricao: DataType.STRING(100),
+        categoria: DataType.STRING(20),
+        quantidade: DataType.INTEGER,
+        fabricante: DataType.STRING(20)
     }, {
         tableName: 'produtos',
         timestamps: false
     })
 
-
+    
 
     return Produto
 }

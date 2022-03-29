@@ -1,25 +1,28 @@
 const sequelize = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataType) => {
     const Farmacia = sequelize.define('Farmacia', {
         farmacia_id: {
-            type: DataTypes.INTEGER,
+            type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        razaosocial: DataTypes.STRING(60),
-        senha: DataTypes.STRING(20),
-        email: DataTypes.STRING(60),
-        telefone: DataTypes.STRING(15),
-        cnpj: DataTypes.STRING(14),
-        fk_enderecofarma_id: DataTypes.INTEGER,
-        fk_produto_id: DataTypes.INTEGER
+        razaosocial: DataType.STRING(60),
+        senha: DataType.STRING(20),
+        email: DataType.STRING(60),
+        telefone: DataType.STRING(15),
+        cnpj: DataType.STRING(14),
+        fk_produto: DataType.INTEGER
     }, {
         tableName: 'farmacias',
         timestamps: false
     })
 
-
+    Farmacia.associate = (modelList) => {
+        Farmacia.hasMany(modelList.Produto, {
+          foreignKey: "fk_produto"
+        })
+      }  
 
     return Farmacia
 }
