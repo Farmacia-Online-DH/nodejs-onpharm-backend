@@ -1,5 +1,3 @@
-const sequelize = require("sequelize");
-
 module.exports = (sequelize, DataType) => {
     const Produto = sequelize.define('Produto', {
         produto_id: {
@@ -12,13 +10,26 @@ module.exports = (sequelize, DataType) => {
         descricao: DataType.STRING(100),
         categoria: DataType.STRING(20),
         quantidade: DataType.INTEGER,
-        fabricante: DataType.STRING(20)
+        fabricante: DataType.STRING(20),
+        fk_farmacia: DataType.INTEGER
     }, {
         tableName: 'produtos',
         timestamps: false
     })
 
+    Produto.associate = (modelsList) =>{
+        Produto.belongsTo(modelsList.Farmacia,{
+            foreignKey:'fk_farmacia'
+        })
+
+    /* Produto.belongsToMany(modelsList.Pedido, {
+            through: modelsList.Carrinho,
+            foreignKey:"fk_produto",
+            timestamps:false}) 
     
+    */
+
+    }
 
     return Produto
 }

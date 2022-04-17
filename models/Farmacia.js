@@ -22,6 +22,12 @@ module.exports = (sequelize, DataType) => {
         Farmacia.hasMany(modelList.Produto, {
           foreignKey: "fk_produto"
         })
+        Farmacia.hasMany(modelList.EnderecoFarma,{
+            foreignKey: 'fk_farmacia'
+        })
+        Farmacia.hasMany(modelList.Pedido, {
+            foreignKey: 'fk_farmacia'
+        })
       }  
 
     return Farmacia

@@ -19,11 +19,13 @@ module.exports = (sequelize, DataType) => {
     timestamps: false
   })
   /** confirmar associate e belongsto */
-  /* Endereco.associate = (modelList) => {
+
+  Endereco.associate = (modelList) => {
     Endereco.belongsTo(modelList.Usuario, {
       foreignKey: 'fk_usuario'
     })
-  } */
+ 
+  } 
 
   return Endereco
 }
