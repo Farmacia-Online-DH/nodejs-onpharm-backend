@@ -7,17 +7,36 @@ module.exports = (app) => {
     app.put('/usuarios/:id', app.api.usuario.updateUsuario)
     app.delete('/usuarios/:id', app.api.usuario.deleteUsuario)
 
-    //--------------------Farmacias
+    //--------------------Farmacias (Rafa)
 
     app.get('/farmacias', app.api.farmacia.getFarmacias)
     app.post('/farmacias', app.api.farmacia.postFarmacia)
     app.put('/farmacias/:id', app.api.farmacia.updateFarmacia)
     app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia)
 
- //--------------------Endereços User (Guilherme)
+    //--------------------Endereços User (Guilherme)
 
 
 
- //---------Endereços Farmácias (Rafa)
+    //---------Endereços Farmácias (Rafa)
+
+    app.get('/enderecoFarma', app.api.enderecoFarma.getEnderecoFarmas)
+    app.post('/enderecoFarma', app.api.enderecoFarma.postEnderecoFarma)
+    app.put('/enderecoFarma/:id', app.api.enderecoFarma.updateEnderecoFarma)
+    app.delete('/enderecoFarma/:id', app.api.enderecoFarma.deleteEnderecoFarma)
+
+    //---------FormaPgto (Rafa)
+
+    app.get('/formaPgto', app.api.formaPgto.getFormaPgtos)
+    app.post('/formaPgto', app.api.formaPgto.postFormaPgto)
+    app.put('/formaPgto/:id', app.api.formaPgto.updateFormaPgto)
+    app.delete('/formaPgto/:id', app.api.formaPgto.deleteFormaPgto)
+
+    //---------FormaPgto (Rafa)
+
+    app.get('/pedidos', app.api.pedido.getPedidos)
+    app.post('/pedidos', app.api.pedido.postPedido)
+    app.put('/pedidos/:id', app.api.pedido.updatePedido)
+    app.delete('/pedidos/:id', app.api.pedido.deletePedido)
 
 }
