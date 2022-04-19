@@ -1,4 +1,3 @@
-const sequelize = require("sequelize");
 
 module.exports = (sequelize, DataType) => {
     const Farmacia = sequelize.define('Farmacia', {
@@ -12,7 +11,6 @@ module.exports = (sequelize, DataType) => {
         email: DataType.STRING(60),
         telefone: DataType.STRING(15),
         cnpj: DataType.STRING(14),
-        fk_produto: DataType.INTEGER
     }, {
         tableName: 'farmacias',
         timestamps: false
@@ -20,7 +18,7 @@ module.exports = (sequelize, DataType) => {
 
     Farmacia.associate = (modelList) => {
         Farmacia.hasMany(modelList.Produto, {
-          foreignKey: "fk_produto"
+          foreignKey: "fk_farmacia"
         })
         Farmacia.hasMany(modelList.EnderecoFarma,{
             foreignKey: 'fk_farmacia'

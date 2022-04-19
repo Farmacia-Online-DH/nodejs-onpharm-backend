@@ -29,13 +29,8 @@ module.exports = (sequelize, DataType) => {
 		Usuario.hasMany(modelsList.Pedido, {
 			foreignKey:'fk_usuario'
 		})
-		Usuario.hasMany(modelsList.Carrinho, {
-			foreignKey:'fk_usuario'
-		})
 		
 	}
-
- 
 
 	return Usuario;
 };

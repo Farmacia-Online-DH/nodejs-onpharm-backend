@@ -9,10 +9,10 @@ module.exports = (app) => {
 
     //--------------------Farmacias
 
-    app.get('/farmacias', app.api.farmacias.getFarmacias)
-    app.post('/farmacias', app.api.farmacias.postFarmacia)
-    app.put('/farmacias/:id', app.api.farmacias.updateFarmacia)
-    app.delete('/farmacias/:id', app.api.farmacias.deleteFarmacia)
+    app.get('/farmacias', app.api.farmacia.getFarmacias)
+    app.post('/farmacias', app.api.farmacia.postFarmacia)
+    app.put('/farmacias/:id', app.api.farmacia.updateFarmacia)
+    app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia)
 
 
 
