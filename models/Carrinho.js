@@ -13,17 +13,8 @@ module.exports = (sequelize, DataType) => {
     timestamps: false
   })
 
-  Carrinho.associate = (modelsList) =>{
-    Carrinho.hasMany(modelsList.Produto,{
-      foreignKey:'fk_produto'
-    })
-    Carrinho.hasMany(modelsList.Pedido,{
-      foreignKey:'fk_pedido'
-    })
-  }
+ 
   
-  
-
   return Carrinho
   
 }

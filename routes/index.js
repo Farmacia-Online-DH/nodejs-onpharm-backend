@@ -14,6 +14,10 @@ module.exports = (app) => {
     app.put('/farmacias/:id', app.api.farmacia.updateFarmacia)
     app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia)
 
+ //--------------------Endereços User (Guilherme)
 
+
+
+ //---------Endereços Farmácias (Rafa)
 
 }

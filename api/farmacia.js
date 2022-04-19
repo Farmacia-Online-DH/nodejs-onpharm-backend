@@ -6,15 +6,9 @@ module.exports = (app) => {
     try {
       const farmacias = await Farmacia.findAll({
         include: [
-          {
-            model: Produto,
-          },
-          {
-            model: EnderecoFarma,
-          },
-          {
-            model: Pedido,
-          },
+          { model: EnderecoFarma },
+          { model: Produto },
+          { model: Pedido },
         ],
       });
       res.status(200).json(farmacias);
@@ -44,7 +38,7 @@ module.exports = (app) => {
   };
 
   const updateFarmacia = async (req, res) => {
-    const idUser = req.params.id;
+    const idFarmacia = req.params.id;
     const { razaosocial, senha, email, telefone, cnpj } = req.body;
 
     try {
@@ -58,7 +52,7 @@ module.exports = (app) => {
         },
         {
           where: {
-            farmacia_id: idUser,
+            farmacia_id: idFarmacia,
           },
         }
       );
@@ -69,12 +63,12 @@ module.exports = (app) => {
   };
 
   const deleteFarmacia = async (req, res) => {
-    const idUser = req.params.id;
+    const idFarmacia = req.params.id;
 
     try {
       await Farmacia.destroy({
         where: {
-          farmacia_id: idUser,
+          farmacia_id: idFarmacia,
         },
       });
       res.status(204).send();
