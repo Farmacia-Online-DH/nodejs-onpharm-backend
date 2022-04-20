@@ -26,13 +26,13 @@ module.exports = (sequelize, DataType) => {
 			foreignKey:'fk_farmacia'
 		})
 
-	/* 	Pedido.belongsToMany(modelsList.Produto,{
+	/*   Pedido.belongsToMany(modelsList.Produto,{
 			as:'pedidos',
 			through: 'carrinhos',
 			foreignKey: 'fk_pedido',
 			timestamps:false
-		})
-  */
+		})  */
+  
 
 
 	};

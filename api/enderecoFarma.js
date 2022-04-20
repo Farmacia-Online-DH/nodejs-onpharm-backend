@@ -1,8 +1,6 @@
 const { EnderecoFarma, Farmacia  } = require("../models");
 
 
-
-
 module.exports = (app) => {
   const getEnderecoFarmas = async (req, res) => {
     try {

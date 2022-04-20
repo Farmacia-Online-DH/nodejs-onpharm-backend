@@ -25,18 +25,24 @@ module.exports = (app) => {
     app.put('/enderecoFarma/:id', app.api.enderecoFarma.updateEnderecoFarma)
     app.delete('/enderecoFarma/:id', app.api.enderecoFarma.deleteEnderecoFarma)
 
-    //---------FormaPgto (Rafa)
+    //---------FormaPgto - User (Rafa)
 
     app.get('/formaPgto', app.api.formaPgto.getFormaPgtos)
     app.post('/formaPgto', app.api.formaPgto.postFormaPgto)
     app.put('/formaPgto/:id', app.api.formaPgto.updateFormaPgto)
     app.delete('/formaPgto/:id', app.api.formaPgto.deleteFormaPgto)
 
-    //---------FormaPgto (Rafa)
+    //---------Pedido (Rafa)
 
     app.get('/pedidos', app.api.pedido.getPedidos)
     app.post('/pedidos', app.api.pedido.postPedido)
     app.put('/pedidos/:id', app.api.pedido.updatePedido)
     app.delete('/pedidos/:id', app.api.pedido.deletePedido)
+
+    //----Produtos
+
+    app.get('/produtos', app.api.produto.getProdutos)
+    
+    //----Carrinhos
 
 }

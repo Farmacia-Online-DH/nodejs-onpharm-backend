@@ -6,7 +6,7 @@ module.exports = (sequelize, DataType) => {
             autoIncrement: true
         },
         nome_produto: DataType.STRING(20),
-        preco: DataType.DOUBLE(7, 2),
+        preco: DataType.DECIMAL(8,2),
         descricao: DataType.STRING(100),
         categoria: DataType.STRING(20),
         quantidade: DataType.INTEGER,
@@ -27,8 +27,8 @@ module.exports = (sequelize, DataType) => {
 			through: 'carrinhos',
 			foreignKey: 'fk_produto',
 			timestamps:false
-		})
- */
+		})  */
+ 
     }
 
     return Produto
