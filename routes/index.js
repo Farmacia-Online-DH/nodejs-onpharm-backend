@@ -16,6 +16,10 @@ module.exports = (app) => {
 
     //--------------------Endereços User (Guilherme)
 
+    app.get('/enderecos-user', app.api.enderecoUser.getEnderecosUser)
+    app.post('/enderecos-user', app.api.enderecoUser.postEnderecosUser)
+    app.put('/enderecos-user/:id', app.api.enderecoUser.updateEnderecosUser)
+    app.delete('/enderecos-user/:id', app.api.enderecoUser.deleteEnderecosUser)
 
 
     //---------Endereços Farmácias (Rafa)
