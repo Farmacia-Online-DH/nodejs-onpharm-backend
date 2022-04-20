@@ -12,8 +12,19 @@ module.exports = (sequelize, DataType) => {
     tableName: 'carrinhos',
     timestamps: false
   })
+  
+/* 
+  Carrinho.associate = (modelsList) =>{
+    
+    Carrinho.belongsTo(modelsList.Pedido,{
+      foreignKey:'fk_pedido'
+    })
+    
+    Carrinho.belongsTo(modelsList.Produto,{
+      foreignKey:'fk_produto'
+    })
 
- 
+  } */
   
   return Carrinho
   

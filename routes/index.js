@@ -43,10 +43,12 @@ module.exports = (app) => {
     app.put('/pedidos/:id', app.api.pedido.updatePedido)
     app.delete('/pedidos/:id', app.api.pedido.deletePedido)
 
-    //----Produtos
+    //----Produtos (Guilherme)
 
     app.get('/produtos', app.api.produto.getProdutos)
     
-    //----Carrinhos
+    //----Carrinho
+
+    app.get('/carrinhos', app.api.carrinho.getCarrinhos)
 
 }
