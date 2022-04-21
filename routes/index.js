@@ -52,6 +52,6 @@ module.exports = (app) => {
 
   app.get('/carrinhos', app.api.carrinho.getCarrinhos);
   app.post('/carrinhos', app.api.carrinho.postCarrinhos);
-  app.put('/carrinhos/:id', app.api.carrinho.putCarrinhos);
-  app.delete('/carrinhos/:id', app.api.carrinho.deleteCarrinhos);
+  app.put('/carrinhos/:id', app.api.carrinho.updateCarrinhos);
+  app.delete('/carrinhos/:id', app.api.carrinho.deleteCarrinhos); 
 };
