@@ -46,6 +46,9 @@ module.exports = (app) => {
     //----Produtos (Guilherme)
 
     app.get('/produtos', app.api.produto.getProdutos)
+    app.post('/produtos', app.api.produto.postProdutos)
+    app.put('/produtos/:id', app.api.produto.updateProdutos)
+    app.delete('/produtos/:id', app.api.produto.deleteProdutos)
     
     //----Carrinho
 
