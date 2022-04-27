@@ -1,5 +1,5 @@
 const { Farmacia, Produto, EnderecoFarma, Pedido } = require("../models");
-
+const bcrypt = require('bcrypt')
 
 module.exports = (app) => {
   const getFarmacias = async (req, res) => {
@@ -19,23 +19,29 @@ module.exports = (app) => {
 
   const postFarmacia = async (req, res) => {
     const { razaosocial, senha, email, telefone, cnpj } = req.body;
-    try {
-      await Farmacia.create({
-        razaosocial,
-        senha,
-        email,
-        telefone,
-        cnpj,
-      });
-      res.status(201).json("Farmacia Cadastrada Com Sucesso");
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({
-        error: true,
-        ...err,
-      });
+    const emailFarmacia = await Farmacia.findOne({where:{email}})
+    if(!emailFarmacia){
+      try {
+        await Farmacia.create({
+          razaosocial,
+          senha: bcrypt.hashSync(senha, 10),
+          email,
+          telefone,
+          cnpj,
+        });
+        res.status(201).json("Farmacia Cadastrada Com Sucesso");
+      } catch (err) {
+        console.log(err);
+        res.status(400).json({ error: true, ...err });
+      }
     }
-  };
+    else{
+      res.status(400).json("Farmacia Já Cadastrada");
+    }
+  } 
+
+
+    
 
   const updateFarmacia = async (req, res) => {
     const idFarmacia = req.params.id;

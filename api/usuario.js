@@ -1,4 +1,5 @@
 const { Usuario, FormaPgto, Endereco, Pedido } = require("../models");
+const bcrypt = require('bcrypt')
 
 module.exports = (app) => {
   const getUsuarios = async (req, res) => {
@@ -18,14 +19,25 @@ module.exports = (app) => {
 
   const postUsuario = async (req, res) => {
     const { nome, senha, email, telefone, cpf } = req.body;
-    try {
-      await Usuario.create({ nome, senha, email, telefone, cpf });
-      res.status(201).json("Usuário Cadastrado Com Sucesso");
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ error: true, ...err });
+    const emailUser = await Usuario.findOne({where: {email} })
+
+    if(!emailUser){
+      try {
+        await Usuario.create({ 
+          nome, 
+          senha:bcrypt.hashSync(senha, 10), 
+          email, 
+          telefone, 
+          cpf });
+        res.status(201).json("Usuário Cadastrado Com Sucesso");
+      } catch (err) {
+        console.log(err);
+        res.status(400).json({ error: true, ...err });
+      }
+    } else{
+      res.status(400).json("Usuário Já Cadastrado!");
     }
-  };
+  }
 
   const updateUsuario = async (req, res) => {
     const idUser = req.params.id;
