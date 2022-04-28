@@ -15,7 +15,8 @@ module.exports = (app) => {
   app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia);
 
    //------- Login 
-  /* app.post('/login', app.api.login.) */
+  app.post('/login-usuario', app.api.login.generateTokenUser)
+  app.post('/login-farmacia', app.api.login.generateTokenPharm)
 
   //--------------------Endereços User 
 
