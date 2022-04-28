@@ -48,7 +48,7 @@ module.exports = (app) => {
   //----Produtos
 
   app.get('/produtos', app.api.produto.getProdutos);
-  app.post('/produtos', app.api.produto.postProdutos);
+  app.post('/produtos', app.middleware.index.gateKeeper, app.api.produto.postProdutos);
   app.put('/produtos/:id', app.api.produto.updateProdutos);
   app.delete('/produtos/:id', app.api.produto.deleteProdutos);
 
