@@ -16,7 +16,6 @@ module.exports = (app) => {
 					email: user.email,
 				}; // pq eu gero esse userToken
 
-                console.log(userToken)
 				const token = jwt.sign({ userToken }, secret);
                 
 				res.status(200).json({ token });

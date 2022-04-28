@@ -1,3 +1,5 @@
-const secret = 'onpharm2022_dh'
+require('dotenv').config()
 
-module.exports = secret  
+const secret = process.env.SECRET
+
+module.exports = { secret }  
