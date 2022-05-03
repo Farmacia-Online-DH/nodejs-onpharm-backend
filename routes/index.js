@@ -4,14 +4,14 @@ module.exports = (app) => {
 
   app.get('/usuarios', app.api.usuario.getUsuarios);
   app.post('/usuarios', app.api.usuario.postUsuario);
-  app.put('/usuarios/:id', app.api.usuario.updateUsuario);
+  app.put('/usuarios/:id', app.middleware.index.gateKeeper, app.api.usuario.updateUsuario);
   app.delete('/usuarios/:id', app.api.usuario.deleteUsuario);
 
   //--------------------Farmacias
 
   app.get('/farmacias', app.api.farmacia.getFarmacias);
   app.post('/farmacias', app.api.farmacia.postFarmacia);
-  app.put('/farmacias/:id', app.api.farmacia.updateFarmacia);
+  app.put('/farmacias/:id', app.middleware.index.gateKeeper, app.api.farmacia.updateFarmacia);
   app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia);
 
    //------- Login 
@@ -41,23 +41,23 @@ module.exports = (app) => {
   //---------Pedido 
 
   app.get('/pedidos', app.api.pedido.getPedidos);
-  app.post('/pedidos', app.api.pedido.postPedido);
-  app.put('/pedidos/:id', app.api.pedido.updatePedido);
+  app.post('/pedidos', app.middleware.index.gateKeeper, app.api.pedido.postPedido);
+  app.put('/pedidos/:id', app.middleware.index.gateKeeper, app.api.pedido.updatePedido);
   app.delete('/pedidos/:id', app.api.pedido.deletePedido);
 
   //----Produtos
 
   app.get('/produtos', app.api.produto.getProdutos);
   app.post('/produtos', app.middleware.index.gateKeeper, app.api.produto.postProdutos);
-  app.put('/produtos/:id', app.api.produto.updateProdutos);
+  app.put('/produtos/:id', app.middleware.index.gateKeeper, app.api.produto.updateProdutos);
   app.delete('/produtos/:id', app.api.produto.deleteProdutos);
 
   //----Carrinho
 
-  app.get('/carrinhos', app.api.carrinho.getCarrinhos);
-  app.post('/carrinhos', app.api.carrinho.postCarrinhos);
-  app.put('/carrinhos/:id', app.api.carrinho.updateCarrinhos);
-  app.delete('/carrinhos/:id', app.api.carrinho.deleteCarrinhos); 
+  app.get('/itens', app.api.item.getItem);
+  app.post('/itens', app.api.item.postItem);
+  app.put('/itens/:id', app.api.item.updateItens);
+  app.delete('/itens/:id', app.api.item.deleteItens); 
 
 
 

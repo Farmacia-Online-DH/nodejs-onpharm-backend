@@ -51,7 +51,7 @@ module.exports = (app) => {
       await Farmacia.update(
         {
           razaosocial,
-          senha,
+          senha:bcrypt.hashSync(senha, 10),
           email,
           telefone,
           cnpj,

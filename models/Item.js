@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
-  const Carrinho = sequelize.define('Carrinho', {
-    carrinho_id: {
+  const Item = sequelize.define('Item', {
+    item_id: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
     fk_pedido: DataType.INTEGER,
     fk_produto: DataType.INTEGER,
   }, {
-    tableName: 'carrinhos',
+    tableName: 'itens',
     timestamps: false
   })
   
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataType) => {
 
   } */
   
-  return Carrinho
+  return Item
   
 }
 

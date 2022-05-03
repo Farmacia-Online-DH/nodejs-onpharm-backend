@@ -45,7 +45,13 @@ module.exports = (app) => {
 
     try {
       await Usuario.update(
-        { nome, senha, email, telefone, cpf },
+        { nome, 
+          senha:bcrypt.hashSync(senha, 10),  
+          email, 
+          telefone, 
+          cpf 
+        },
+        
         {
           where: { usuario_id: idUser },
         }

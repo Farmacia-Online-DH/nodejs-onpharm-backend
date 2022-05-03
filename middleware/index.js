@@ -1,10 +1,9 @@
 const jwt = require('jsonwebtoken')
-const { secret } = require('../utils')
 
 const gateKeeper = (req, res, next) => {
     if(req.headers && req.headers.authorization){
        try{
-            jwt.verify(req.headers.authorization, secret)
+            jwt.verify(req.headers.authorization, process.env.secret)
             next()
        } 
        catch(err){

@@ -1,7 +1,7 @@
 const { Usuario, Farmacia } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const secret = require("../utils");
+
 
 module.exports = (app) => {
 	const generateTokenUser = async (req, res) => {
@@ -14,12 +14,12 @@ module.exports = (app) => {
 				const userToken = {
 					id: user.usuario_id,
 					email: user.email,
-				}; // pq eu gero esse userToken
+				};
 
-				const token = jwt.sign({ userToken }, secret);
-                
+				const token = jwt.sign({ userToken }, process.env.secret);
 				res.status(200).json({ token });
 			} catch (err) {
+                console.log(err)
 				res.status(400).json(err)
 			}
 		} else{
@@ -39,7 +39,7 @@ module.exports = (app) => {
                     email: userPharm.email,
                 };
 
-                const token = jwt.sign({ userTokenPharm }, secret);
+                const token = jwt.sign({ userTokenPharm }, process.env.secret);
                 res.status(200).json({ token })
             }
             catch(err){

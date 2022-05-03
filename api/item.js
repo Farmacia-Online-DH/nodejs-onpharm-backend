@@ -2,9 +2,9 @@ const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models");
 
 module.exports = () => {
-	const getCarrinhos = async (req, res) => {
+	const getItem = async (req, res) => {
 		try {
-			const carrinho = await sequelize.query(
+			const item = await sequelize.query(
 				`
             SELECT nome_produto, preco, quantidade, razaosocial AS farmacia, 
             preco*quantidade as Valor, nome as Cliente
@@ -15,13 +15,13 @@ module.exports = () => {
             `,
 				{ type: QueryTypes.SELECT }
 			);
-			res.status(200).json(carrinho);
+			res.status(200).json(item);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	const postCarrinhos = async (req, res) => {
+	const postItem = async (req, res) => {
 		const { fk_pedido, fk_produto, quantidade } = req.body;
 		try {
 			await sequelize.query(
@@ -43,8 +43,8 @@ module.exports = () => {
 		}
 	};
 
-	const updateCarrinhos = async (req, res) => {
-		const idCarrinhos = req.params.id;
+	const updateItens = async (req, res) => {
+		const idItens = req.params.id;
 		const { fk_pedido, fk_produto, quantidade } = req.body;
 
 		try {
@@ -57,7 +57,7 @@ module.exports = () => {
 						pedido: fk_pedido,
 						produto: fk_produto,
 						quantidade: quantidade,
-						id: idCarrinhos,
+						id: idItens,
 					},
 					type: QueryTypes.UPDATE,
 				}
@@ -69,8 +69,8 @@ module.exports = () => {
 		}
 	};
 
-	const deleteCarrinhos = async (req, res) => {
-		const idCarrinhos = req.params.id;
+	const deleteItens = async (req, res) => {
+		const idItens = req.params.id;
 		try {
 			await sequelize.query(
 				`
@@ -78,7 +78,7 @@ module.exports = () => {
             carrinhos
             WHERE
             carrinho_id = :id`,
-				{ replacements: { id: idCarrinhos }, type: QueryTypes.DELETE }
+				{ replacements: { id: idItens }, type: QueryTypes.DELETE }
 			);
 
 			res.status(204).send();
@@ -87,5 +87,5 @@ module.exports = () => {
 		}
 	};
 
-	return { getCarrinhos, postCarrinhos, updateCarrinhos, deleteCarrinhos };
+	return { getItem, postItem, updateItens, deleteItens };
 };
