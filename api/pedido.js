@@ -19,13 +19,13 @@ module.exports = (app) => {
 
 	const postPedido = async (req, res) => {
 		const { staus_compra, valor_final, fk_usuario, fk_pagamento, fk_farmacia } = req.body;
-    let { fk_pedido, fk_produto, quantidade } = req.body
+    	let { fk_pedido, fk_produto, quantidade } = req.body
 
 		try {
-			const result = jwt.verify(req.headers.authorization, process.env.secret);
-      const pagamento = await FormaPgto.findOne( { where:{ fk_usuario: result.userToken.id} })
-      console.log(result)
-      res.status(200).json('ok')
+	  		const result = jwt.verify(req.headers.authorization, process.env.secret);
+      		const pagamento = await FormaPgto.findOne( { where:{ fk_usuario: result.userToken.id} })
+      		console.log(result)
+      		res.status(200).json('ok')
 		} catch (err) {
 			res.status(401).json(err);
 		}

@@ -60,7 +60,4 @@ module.exports = (app) => {
   app.delete('/itens/:id', app.api.item.deleteItens); 
 
 
-
-
-
 };

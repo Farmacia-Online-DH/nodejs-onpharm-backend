@@ -1,79 +1,110 @@
 const { Usuario, FormaPgto, Endereco, Pedido } = require("../models");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 
 module.exports = (app) => {
-  const getUsuarios = async (req, res) => {
-    try {
-      const usuarios = await Usuario.findAll({
-        include: [
-          { model: Endereco },
-          { model: FormaPgto },
-          { model: Pedido },
-        ],
-      });
-      res.status(200).json(usuarios);
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  };
+	const getUsuarios = async (req, res) => {
+		try {
+			const usuarios = await Usuario.findAll({
+				include: [
+					{ model: Endereco },
+					{ model: FormaPgto },
+					{ model: Pedido },
+				],
+			});
+			res.status(200).json(usuarios);
+		} catch (err) {
+			res.status(400).json(err);
+		}
+	};
 
-  const postUsuario = async (req, res) => {
-    const { nome, senha, email, telefone, cpf } = req.body;
-    const emailUser = await Usuario.findOne({where: {email} })
+	const postUsuario = async (req, res) => {
+		const {
+			nome,
+			senha,
+			email,
+			telefone,
+			cpf,
+			cep,
+			logradouro,
+			numero,
+			complemento,
+			cidade,
+			estado,
+		} = req.body;
 
-    if(!emailUser){
-      try {
-        await Usuario.create({ 
-          nome, 
-          senha:bcrypt.hashSync(senha, 10), 
-          email, 
-          telefone, 
-          cpf });
-        res.status(201).json("Usuário Cadastrado Com Sucesso");
-      } catch (err) {
-        console.log(err);
-        res.status(400).json({ error: true, ...err });
-      }
-    } else{
-      res.status(400).json("Usuário Já Cadastrado!");
-    }
-  }
+    console.log(req.body)
 
-  const updateUsuario = async (req, res) => {
-    const idUser = req.params.id;
-    const { nome, senha, email, telefone, cpf } = req.body;
+		const emailUser = await Usuario.findOne({ where: { email } });
 
-    try {
-      await Usuario.update(
-        { nome, 
-          senha:bcrypt.hashSync(senha, 10),  
-          email, 
-          telefone, 
-          cpf 
-        },
-        
-        {
-          where: { usuario_id: idUser },
-        }
-      );
-      res.send(200).json("Usuário Atualizado Com Sucesso");
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  };
+		if (!emailUser) {
+			try {
+				const responseUser = await Usuario.create({
+					nome,
+					senha: bcrypt.hashSync(senha, 10),
+					email,
+					telefone,
+					cpf,
+				});
 
-  const deleteUsuario = async (req, res) => {
-    const idUser = req.params.id;
+				const userId = responseUser.dataValues.usuario_id;
 
-    try {
-      await Usuario.destroy({
-        where: { usuario_id: idUser },
-      });
-      res.status(204).send();
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  };
+				if (userId) {
+					await Endereco.create({
+						cep,
+						logradouro,
+						numero:parseInt(numero),
+						complemento,
+						cidade,
+						estado,
+						fk_usuario: userId,
+					});
+					res.status(201).json("Usuário Cadastrado Com Sucesso");
+				}
+			} catch (err) {
+				console.log(err);
+				res.status(400).json({ error: true, ...err });
+			}
+		} else {
+			res.status(400).json("Usuário Já Cadastrado!");
+		}
+	};
 
-  return { getUsuarios, postUsuario, updateUsuario, deleteUsuario };
+	const updateUsuario = async (req, res) => {
+		const idUser = req.params.id;
+		const { nome, senha, email, telefone, cpf } = req.body;
+
+		try {
+			await Usuario.update(
+				{
+					nome,
+					senha: bcrypt.hashSync(senha, 10),
+					email,
+					telefone,
+					cpf,
+				},
+
+				{
+					where: { usuario_id: idUser },
+				}
+			);
+			res.send(200).json("Usuário Atualizado Com Sucesso");
+		} catch (err) {
+			res.status(400).json(err);
+		}
+	};
+
+	const deleteUsuario = async (req, res) => {
+		const idUser = req.params.id;
+
+		try {
+			await Usuario.destroy({
+				where: { usuario_id: idUser },
+			});
+			res.status(204).send();
+		} catch (err) {
+			res.status(400).json(err);
+		}
+	};
+
+	return { getUsuarios, postUsuario, updateUsuario, deleteUsuario };
 };

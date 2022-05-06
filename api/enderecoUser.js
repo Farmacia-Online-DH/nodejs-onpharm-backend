@@ -1,5 +1,6 @@
 const { Endereco } = require("../models");
 
+
 module.exports = () => {
 	const getEnderecosUser = async (req, res) => {
 		try {
