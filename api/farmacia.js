@@ -18,17 +18,39 @@ module.exports = (app) => {
   };
 
   const postFarmacia = async (req, res) => {
-    const { razaosocial, senha, email, telefone, cnpj } = req.body;
+    const {
+      razaosocial, senha, email,
+      telefone, cnpj, cep, 
+      logradouro, numero, complemento, 
+      cidade, estado } = req.body;
+
+    console.log(req.body)
+
     const emailFarmacia = await Farmacia.findOne({where:{email}})
+    
     if(!emailFarmacia){
       try {
-        await Farmacia.create({
+        
+       const responseEstab = await Farmacia.create({
           razaosocial,
           senha: bcrypt.hashSync(senha, 10),
           email,
           telefone,
           cnpj,
         });
+        const estabelecimentoId = responseEstab.dataValues.farmacia_id;
+
+        if(estabelecimentoId){
+          await EnderecoFarma.create({
+            cep,
+						logradouro,
+						numero:parseInt(numero),
+						complemento,
+						cidade,
+						estado,
+						fk_farmacia: estabelecimentoId,
+          })
+        }
         res.status(201).json("Farmacia Cadastrada Com Sucesso");
       } catch (err) {
         console.log(err);
@@ -40,8 +62,6 @@ module.exports = (app) => {
     }
   } 
 
-
-    
 
   const updateFarmacia = async (req, res) => {
     const idFarmacia = req.params.id;
