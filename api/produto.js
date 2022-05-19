@@ -12,15 +12,17 @@ module.exports = (app) => {
 	};
 
 	const postProdutos = async (req, res) => {
-		const {
+		let {
 			nome_produto,
 			preco,
 			descricao,
 			categoria,
-			estoque,
+		    estoque,
 			fabricante,
 			fk_farmacia,
 		} = req.body;
+		estoque = parseInt(estoque)
+		console.log(req.body);
 
 		try {
 			await Produto.create({

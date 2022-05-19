@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
         preco: DataType.DECIMAL(8,2),
         descricao: DataType.STRING(100),
         categoria: DataType.STRING(20),
-        quantidade: DataType.INTEGER,
+        estoque: DataType.INTEGER,
         fabricante: DataType.STRING(20),
         fk_farmacia: DataType.INTEGER
     }, {

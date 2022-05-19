@@ -1,5 +1,6 @@
 const { Usuario, FormaPgto, Endereco, Pedido } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 module.exports = (app) => {
 	const getUsuarios = async (req, res) => {
@@ -16,6 +17,23 @@ module.exports = (app) => {
 			res.status(400).json(err);
 		}
 	};
+
+	const getUsuariosById = async (req, res) =>{
+		const userId = req.params.id
+		try {
+			const usuarios = await Usuario.findAll({
+				where:{ usuario_id:userId },
+				include: [
+					{ model: Endereco },
+					{ model: FormaPgto },
+					{ model: Pedido },
+				]
+			});
+			res.status(200).json(usuarios);
+		} catch (err) {
+			res.status(400).json(err);
+		}
+	}
 
 	const postUsuario = async (req, res) => {
 		const {
@@ -70,8 +88,18 @@ module.exports = (app) => {
 	};
 
 	const updateUsuario = async (req, res) => {
-		const idUser = req.params.id;
-		const { nome, senha, email, telefone, cpf } = req.body;
+		const userId = req.params.id
+		const { nome,
+			senha,
+			email,
+			telefone,
+			cpf,
+			cep,
+			logradouro,
+			numero,
+			complemento,
+			cidade,
+			estado} = req.body;
 
 		try {
 			await Usuario.update(
@@ -84,10 +112,24 @@ module.exports = (app) => {
 				},
 
 				{
-					where: { usuario_id: idUser },
+					where: { usuario_id: userId },
 				}
 			);
-			res.send(200).json("Usuário Atualizado Com Sucesso");
+
+			if(userId){
+				await Endereco.update(
+					{
+						cep,
+						logradouro,
+						numero,
+						complemento,
+						cidade,
+						estado
+					},
+					{ where: { fk_usuario: userId } }
+				);
+			}
+			res.status(200).json("Usuário Atualizado Com Sucesso");
 		} catch (err) {
 			res.status(400).json(err);
 		}
@@ -106,5 +148,5 @@ module.exports = (app) => {
 		}
 	};
 
-	return { getUsuarios, postUsuario, updateUsuario, deleteUsuario };
+	return { getUsuarios, getUsuariosById, postUsuario, updateUsuario, deleteUsuario };
 };

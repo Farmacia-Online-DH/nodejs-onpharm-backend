@@ -17,7 +17,7 @@ module.exports = (app) => {
 				};
 
 				const token = jwt.sign({ userToken }, process.env.secret);
-				res.status(200).json({ token });
+				res.status(200).json({ token, id:user.usuario_id, email:user.email });
 			} catch (err) {
                 console.log(err)
 				res.status(400).json(err)
@@ -39,8 +39,8 @@ module.exports = (app) => {
                     email: userPharm.email,
                 };
 
-                const token = jwt.sign({ userTokenPharm }, process.env.secret);
-                res.status(200).json({ token })
+                const token = await jwt.sign({ userTokenPharm }, process.env.secret);
+                res.status(200).json({ token, id: userPharm.farmacia_id, email: userPharm.email })
             }
             catch(err){
                 console.log(err)

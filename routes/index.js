@@ -3,6 +3,7 @@ module.exports = (app) => {
   //--------------------Usuarios
 
   app.get('/usuarios', app.api.usuario.getUsuarios);
+  app.get('/usuarios/:id', app.api.usuario.getUsuariosById);
   app.post('/usuarios', app.api.usuario.postUsuario);
   app.put('/usuarios/:id', app.middleware.index.gateKeeper, app.api.usuario.updateUsuario);
   app.delete('/usuarios/:id', app.api.usuario.deleteUsuario);
@@ -10,6 +11,7 @@ module.exports = (app) => {
   //--------------------Farmacias
 
   app.get('/farmacias', app.api.farmacia.getFarmacias);
+  app.get('/farmacias/:id', app.api.farmacia.getFarmaciasById);
   app.post('/farmacias', app.api.farmacia.postFarmacia);
   app.put('/farmacias/:id', app.middleware.index.gateKeeper, app.api.farmacia.updateFarmacia);
   app.delete('/farmacias/:id', app.api.farmacia.deleteFarmacia);
